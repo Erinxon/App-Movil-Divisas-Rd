@@ -1,0 +1,48 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title>Calculadora</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <div *ngIf="!loanding">
+    <ion-item>
+      <ion-label>Seleccione el tipo de Moneda</ion-label>
+      <ion-select [value]="select.selected" (ionChange)="onChange($event)">
+        <ion-select-option value="Dolar">Dolar</ion-select-option>
+        <ion-select-option value="Euro">Euro</ion-select-option>
+      </ion-select>
+    </ion-item>
+    <ion-card>
+      
+      <ion-row [formGroup]="form">
+        <ion-col size="12"><h3>Convertir de peso a dolar</h3></ion-col>
+        <ion-col size="5">
+          <ion-input type="number" style="font-size: 20px;" formControlName="peso" placeholder="Peso"></ion-input>
+        </ion-col>
+        <ion-col size="1">
+          <ion-input readonly style="font-size: 20px;font-weight: 700;" value="="></ion-input>
+        </ion-col>
+        <ion-col size="6" color="primary">
+          <ion-input type="number" style="font-size: 20px;" formControlName="otraMoneda" [disabled]="true"></ion-input>
+        </ion-col>
+        <ion-col size="12">
+          <ion-button expand="block" color="tertiary" [disabled]="form.invalid" (click)="calcular()">Calcular</ion-button>
+        </ion-col>
+      </ion-row>
+    </ion-card>
+  </div>
+
+  <app-loading *ngIf="loanding && !error.isError"></app-loading>
+  <ion-row class="ion-text-center ion-margin-top" *ngIf="error.isError">
+    <ion-col size="12">
+      <label>Ocurrió un error</label>
+    </ion-col>
+    <ion-col size="12">
+      <ion-button expand="block" color="danger" (click)="reintentar()">Reintentar</ion-button>
+    </ion-col>
+  </ion-row>
+</ion-content>

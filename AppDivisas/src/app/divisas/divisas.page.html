@@ -1,0 +1,38 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title>Divisas</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <div *ngIf="!loanding">
+    <ion-card>
+      <ion-card-header class="header">Dolar</ion-card-header>
+      <ion-card-content>
+        <ion-item>Compra: {{data.dolar.compra | currency}}</ion-item>
+        <ion-item>Venta: {{data.dolar.venta| currency}}</ion-item>
+        <ion-item>Ultima Actualización: {{data.dolar.ultimaActualizacion}}</ion-item>    
+      </ion-card-content>
+    </ion-card>
+    <ion-card>
+      <ion-card-header class="header">Euro</ion-card-header>
+      <ion-card-content>
+        <ion-item>Compra: {{data.euro.compra | currency}}</ion-item>
+        <ion-item>Venta: {{data.euro.venta | currency}}</ion-item>
+        <ion-item>Ultima Actualización: {{data.euro.ultimaActualizacion}}</ion-item>    
+      </ion-card-content>
+    </ion-card>
+  </div>
+  <app-loading *ngIf="loanding && !error.isError"></app-loading>
+  <ion-row class="ion-text-center ion-margin-top" *ngIf="error.isError">
+    <ion-col size="12">
+      <label>Ocurrió  un error</label>
+    </ion-col>
+    <ion-col size="12">  
+      <ion-button expand="block" color="danger" (click)="reintentar()">Reintentar</ion-button>
+    </ion-col>
+  </ion-row>
+</ion-content>

@@ -1,0 +1,6 @@
+{
+	"appId": "io.ionic.starter.app.divisas",
+	"appName": "AppDivisas",
+	"webDir": "www",
+	"bundledWebRuntime": false
+}
